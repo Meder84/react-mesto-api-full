@@ -1,0 +1,10 @@
+.popup__container-place {
+  margin: 0 auto;
+  padding: 0;
+  width: 75vw;
+  height: 75vh;
+  max-width: 816px;
+  position: relative;
+  box-sizing: border-box;
+  color: #fff;
+}

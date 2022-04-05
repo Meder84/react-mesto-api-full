@@ -1,0 +1,7 @@
+.footer {
+  margin: 0;
+  max-width: max-content;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+} 

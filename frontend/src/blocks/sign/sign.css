@@ -1,0 +1,9 @@
+.sign{
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 358px;
+  text-align: center;
+  height: calc(100vh - 199px);
+  /* justify-content: space-between; */
+}

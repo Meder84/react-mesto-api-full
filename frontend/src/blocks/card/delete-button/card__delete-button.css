@@ -1,0 +1,16 @@
+.card__delete-button{
+  background-color: rgba(0, 0, 0, 0.0);
+  background-image: url(../../../images/basket-button.svg);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  margin: 0;
+  padding: 0;
+  min-width: 18px;
+  min-height: 19px;
+  border-style: none;
+  align-self: center;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+}

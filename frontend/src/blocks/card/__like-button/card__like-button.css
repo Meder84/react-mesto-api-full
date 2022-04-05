@@ -1,0 +1,14 @@
+.card__like-button {
+  background-color: #fff;
+  background-image: url(../../../images/heard-image.svg);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  margin: 0;
+  padding: 0;
+  min-width: 22px;
+  min-height: 19px;
+  border-style: none;
+  align-self: center;
+  cursor: pointer;
+  transition: 0.3s;
+}

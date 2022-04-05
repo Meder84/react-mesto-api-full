@@ -1,0 +1,9 @@
+.card {
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  color: #000;
+  border-radius: 10px;
+  list-style-type: none;
+  position: relative;
+}

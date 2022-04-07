@@ -12,7 +12,7 @@ const { createUser, login } = require('./controllers/users');
 const { registerValid, loginValid } = require('./middlewares/validations');
 const auth = require('./middlewares/auth');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3001 } = process.env;
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const app = express();
@@ -30,7 +30,8 @@ app.use(cookieParser());
 app.use(requestLogger); // Логгер запросов нужно подключить до всех обработчиков роутов:
 
 app.use(cors({
-  origin: 'https://asman.students.nomoredomains.xyz',
+  origin: 'localhost:3000',
+  // origin: 'https://asman.students.nomoredomains.xyz',
   credentials: true,
 }));
 app.get('/crash-test', () => { // Надо удалить этот код после успешного прохождения ревью.

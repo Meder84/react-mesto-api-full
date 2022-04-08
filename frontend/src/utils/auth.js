@@ -1,5 +1,5 @@
-// export const BASE_URL = 'https://asman.students.nomoredomains.xyz';
-export const BASE_URL = 'http://localhost:3000';
+export const BASE_URL = 'https://asman.students.nomoredomains.xyz';
+// export const BASE_URL = 'http://localhost:3001';
 // export const BASE_URL = 'https://auth.nomoreparties.co';
 
 const request = ({url, method = 'POST', token, body}) => {

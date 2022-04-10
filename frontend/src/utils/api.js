@@ -81,8 +81,10 @@ class Api {
 
 const api = new Api({
   baseUrl: BASE_URL,
+  // baseUrl: 'http://localhost:3000',
   headers: {
-    authorization: '04054c0a-e5f0-43e0-9b89-7862898c59bd',
+    // authorization: `Bearer ${localStorage.getItem('jwt')}`,
+    'Accept': 'application/json',
     'Content-Type': 'application/json;charset=utf-8',
   }
   // baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-33/',

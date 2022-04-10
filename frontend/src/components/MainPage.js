@@ -37,9 +37,9 @@ function MainPage(props) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
 
     api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-      const newCards = cards.map((c) => 
+      const newCards = cards.map((c) =>
       c._id === card._id ? newCard : c);
-     
+
       setCards(newCards);
     })
     .catch((err) => alert(err))
@@ -52,8 +52,8 @@ function MainPage(props) {
     })
     .catch((err) => alert(err))
   }
-  
-  
+
+
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
   }
@@ -101,7 +101,7 @@ function MainPage(props) {
     setSelectedCard({name: '', link: ''});
   }
 
-  
+
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -111,7 +111,7 @@ function MainPage(props) {
             {props.email}
           </p>
           <button
-            className="header__button opacity" 
+            className="header__button opacity"
             onClick={props.handleLogout}
           >
             Выйти
@@ -129,19 +129,19 @@ function MainPage(props) {
       />
       <Footer />
 
-      <EditProfilePopup 
-        isOpen={isEditProfilePopupOpen} 
-        onClose={closeAllPopups} 
-        onUpdateUser={handleUpdateUser}            
+      <EditProfilePopup
+        isOpen={isEditProfilePopupOpen}
+        onClose={closeAllPopups}
+        onUpdateUser={handleUpdateUser}
       />
 
-      <EditAvatarPopup 
-        isOpen={isEditAvatarPopupOpen} 
-        onClose={closeAllPopups} 
+      <EditAvatarPopup
+        isOpen={isEditAvatarPopupOpen}
+        onClose={closeAllPopups}
         onUpdateAvatar={handleUpdateAvatar}
       />
-        
-      <AddPlacePopup 
+
+      <AddPlacePopup
         isOpen={isAddPlacePopupOpen}
         onClose={closeAllPopups}
         onAddPlace={handleAddPlaceSubmit}
@@ -151,7 +151,7 @@ function MainPage(props) {
         onClose = {closeAllPopups}
       />
     </CurrentUserContext.Provider>
-  )    
+  )
 }
 
 export default MainPage;

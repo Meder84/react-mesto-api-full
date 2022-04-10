@@ -24,10 +24,10 @@ function Register (props) {
     e.preventDefault();
     const {password, email} = state;
     if (!password || !email ) return;
-    
+
     props.handleRegister(password, email, formReset);
-  } 
-  
+  }
+
   return(
     <>
       <Header>
@@ -37,36 +37,36 @@ function Register (props) {
         <h3 className="sign__subtitle">
           Регистрация
         </h3>
-        <form 
-          onSubmit={handleSubmit} 
+        <form
+          onSubmit={handleSubmit}
           className="sign__form"
         >
           <label>
-            <input 
+            <input
               className="sign__input"
-              id="email" 
-              name="email" 
-              type="email" 
+              id="email"
+              name="email"
+              type="email"
               placeholder="Email"
-              value={state.email} 
-              onChange={handleChange} 
+              value={state.email}
+              onChange={handleChange}
             />
           </label>
-          
+
           <label>
-            <input 
+            <input
               className="sign__input"
-              id="password" 
-              name="password" 
-              type="password" 
+              id="password"
+              name="password"
+              type="password"
               placeholder="Пароль"
-              value={state.password} 
-              onChange={handleChange} 
+              value={state.password}
+              onChange={handleChange}
             />
           </label>
-      
-          <button 
-            type="submit" 
+
+          <button
+            type="submit"
             className="sign__button opacity"
           >
             Зарегистрироваться
@@ -81,5 +81,5 @@ function Register (props) {
   )
 }
 
-export default Register; 
+export default Register;
 

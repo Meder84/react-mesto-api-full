@@ -1,3 +1,5 @@
+import { BASE_URL } from './auth';
+
 class Api {
   constructor(config) {
     this._url = config.baseUrl;
@@ -78,11 +80,16 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-33/',
+  baseUrl: BASE_URL,
   headers: {
     authorization: '04054c0a-e5f0-43e0-9b89-7862898c59bd',
     'Content-Type': 'application/json;charset=utf-8',
   }
+  // baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-33/',
+  // headers: {
+  //   authorization: '04054c0a-e5f0-43e0-9b89-7862898c59bd',
+  //   'Content-Type': 'application/json;charset=utf-8',
+  // }
 })
 
 export default api;

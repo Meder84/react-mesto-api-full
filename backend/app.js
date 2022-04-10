@@ -30,8 +30,8 @@ app.use(cookieParser());
 app.use(requestLogger); // Логгер запросов нужно подключить до всех обработчиков роутов:
 
 app.use(cors({
-  // origin: 'localhost:3001',
-  origin: 'https://asman.students.nomoredomains.xyz',
+  origin: 'http://localhost:3000',
+  // origin: 'https://asman.students.nomoredomains.xyz',
   credentials: true,
 }));
 app.get('/crash-test', () => { // Надо удалить этот код после успешного прохождения ревью.

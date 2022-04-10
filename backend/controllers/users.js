@@ -6,7 +6,7 @@ const ErrorConflict = require('../errors/ErrorConflict');
 const BadRequestError = require('../errors/BadRequest');
 const { SALT_ROUNDS } = require('../config/constants');
 
-const { NODE_ENV, JWT_SECRET = 'JWT_SECRET' } = process.env;
+const { NODE_ENV, JWT_SECRET = '04054c0a-e5f0-43e0-9b89-7862898c59bd' } = process.env;
 
 const createUser = (req, res, next) => {
   const {
@@ -47,7 +47,7 @@ const login = (req, res, next) => {
     .then((user) => {
       const token = jwt.sign(
         { _id: user._id },
-        NODE_ENV === 'production' ? JWT_SECRET : 'JWT_SECRET',
+        NODE_ENV === 'production' ? JWT_SECRET : '04054c0a-e5f0-43e0-9b89-7862898c59bd',
         { expiresIn: '7d' },
       );
       res.cookie('jwt', token, {

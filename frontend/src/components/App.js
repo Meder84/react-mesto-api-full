@@ -25,10 +25,11 @@ function App () {
   useEffect(() => {
     tokenCheck();
   }, []);
-  
-  function handleLogin (password, email, formReset) {    
+
+  function handleLogin (password, email, formReset) {
     auth.authorize(password, email)
       .then((data) => {
+        console.dir(data.token)
         if (!data.token) return;
 
         localStorage.setItem('jwt', data.token);
@@ -46,18 +47,18 @@ function App () {
         });
         setIsInfoTooltipOpen(true)
       })
-  } 
+  }
 
   function handleRegister(password, email, formReset) {
     auth.register(password, email)
     .then(() => {
 
       setState((old) => ({
-        ...old, 
+        ...old,
         message: 'Вы успешно зарегистрировались!',
         imgTooltip: tick,
       }));
-      
+
       formReset();
       history.push('/signin');
     })
@@ -81,7 +82,7 @@ function App () {
 
     auth.getContent(jwt).then((res) => {
       if (!res) return;
-      
+
       setState({
         loggedIn: true,
         email: res.data.email,
@@ -93,7 +94,7 @@ function App () {
       console.log(err);
     });
   }
-      
+
   function closePopup () {
     setIsInfoTooltipOpen(false);
   }
@@ -103,12 +104,12 @@ function App () {
       <div className="page">
         <Switch>
           <ProtectedRoute path="/main-page" loggedIn={state.loggedIn}>
-            <MainPage 
+            <MainPage
               handleLogout={handleLogout}
               email={state.email}
             />
           </ProtectedRoute>
-          
+
           <Route path="/signup">
             <Register handleRegister={handleRegister} />
           </Route>
@@ -119,13 +120,13 @@ function App () {
 
 
           <Route path="/">
-          {state.loggedIn 
-            ? <Redirect to="/main-page" /> 
+          {state.loggedIn
+            ? <Redirect to="/main-page" />
             : <Redirect to="/signup" />
           }
           </Route>
-        </Switch> 
-        
+        </Switch>
+
         <InfoTooltip
           isOpen={isInfoTooltipOpen}
           onClose={closePopup}

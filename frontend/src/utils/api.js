@@ -15,6 +15,7 @@ class Api {
 
   getUser() {
     return fetch( this._url + 'users/me', {
+      credentials: 'include',
       headers: this._headers,
     })
     .then(this._errorHandler);
@@ -22,6 +23,7 @@ class Api {
 
   setUser(data) {
     return fetch( this._url + 'users/me', {
+      credentials: 'include',
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
@@ -34,6 +36,7 @@ class Api {
 
   getCards() {
     return fetch( this._url + 'cards', {
+      credentials: 'include',
       headers: this._headers,
     })
     .then(this._errorHandler);
@@ -41,6 +44,7 @@ class Api {
 
   addNewCard(data) {
     return fetch( this._url + 'cards', {
+      credentials: 'include',
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
@@ -53,6 +57,7 @@ class Api {
 
   deleteCard(id) {
     return fetch( this._url + 'cards/' + id, {
+      credentials: 'include',
       method: 'DELETE',
       headers: this._headers
     })
@@ -61,6 +66,7 @@ class Api {
 
   changeLikeCardStatus(id, condition) {
     return fetch( this._url + 'cards/likes/' + id, {
+      credentials: 'include',
       method: condition ? 'PUT' : 'DELETE',
       headers: this._headers
     })
@@ -69,6 +75,7 @@ class Api {
 
   userAvatarUpdate(data) {
     return fetch( this._url + 'users/me/avatar', {
+      credentials: 'include',
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
@@ -81,11 +88,10 @@ class Api {
 
 const api = new Api({
   baseUrl: BASE_URL,
-  // baseUrl: 'http://localhost:3000',
   headers: {
     // authorization: `Bearer ${localStorage.getItem('jwt')}`,
-    'Accept': 'application/json',
-    'Content-Type': 'application/json;charset=utf-8',
+    credentials: 'include',
+    'Content-Type': 'application/json',
   }
   // baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-33/',
   // headers: {

@@ -6,7 +6,7 @@ const ErrorConflict = require('../errors/ErrorConflict');
 const BadRequestError = require('../errors/BadRequest');
 const { SALT_ROUNDS } = require('../config/constants');
 
-const { NODE_ENV, JWT_SECRET = 'JWT_SECRET' } = process.env;
+const { NODE_ENV, JWT_SECRET } = process.env;
 
 const createUser = (req, res, next) => {
   const {
@@ -52,8 +52,9 @@ const login = (req, res, next) => {
       );
       res.cookie('jwt', token, {
         maxAge: 3600000 * 24 * 7,
-        httpOnly: true,
-        sameSite: true,
+        httpOnly: true, // нельзя прочесть из JavaScript. Защитим токен:
+        sameSite: true, // укажет браузеру, чтобы тот посылал куки,
+        // только если запрос сделан с того же домена.
       })
         .send({ message: 'Авторизация прошла успешно!' });
     })

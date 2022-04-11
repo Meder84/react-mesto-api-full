@@ -26,6 +26,27 @@ function App () {
     tokenCheck();
   }, []);
 
+  function handleRegister(password, email, formReset) {
+    auth.register(password, email)
+    .then(() => {
+
+      setState((old) => ({
+        ...old,
+        message: 'Вы успешно зарегистрировались!',
+        imgTooltip: tick,
+      }));
+
+      formReset();
+      history.push('/signin');
+    })
+    .catch(() => setState((old) => ({
+      ...old,
+      message: 'Что-то пошло не так! Попробуйте ещё раз.',
+      imgTooltip: cross,
+    })))
+    .finally(() => setIsInfoTooltipOpen(true))
+  }
+
   function handleLogin (password, email, formReset) {
     auth.authorize(password, email)
       .then((data) => {
@@ -47,27 +68,6 @@ function App () {
         });
         setIsInfoTooltipOpen(true)
       })
-  }
-
-  function handleRegister(password, email, formReset) {
-    auth.register(password, email)
-    .then(() => {
-
-      setState((old) => ({
-        ...old,
-        message: 'Вы успешно зарегистрировались!',
-        imgTooltip: tick,
-      }));
-
-      formReset();
-      history.push('/signin');
-    })
-    .catch(() => setState((old) => ({
-      ...old,
-      message: 'Что-то пошло не так! Попробуйте ещё раз.',
-      imgTooltip: cross,
-    })))
-    .finally(() => setIsInfoTooltipOpen(true))
   }
 
   function handleLogout () {

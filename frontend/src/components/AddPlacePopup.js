@@ -18,14 +18,14 @@ function handleChangeName(evt) {
 function handleChangeInfo(evt) {
   setLink(evt.target.value)
 }
-  
+
 function handleSubmit(evt) {
   evt.preventDefault();
   props.onAddPlace({
     name,
-    link
+    link,
   })
-}  
+}
 
   return(
     <PopupWithForm
@@ -37,35 +37,35 @@ function handleSubmit(evt) {
       onSubmit = {handleSubmit}
     >
       <input
-        className="popup__input popup__input_description" 
-        type="text" 
+        className="popup__input popup__input_description"
+        type="text"
         name="name"
         id="description-input"
         required
         minLength="2"
         maxLength="30"
-        autoComplete="off" 
-        placeholder="Название" 
+        autoComplete="off"
+        placeholder="Название"
         onChange={handleChangeName}
         value={name || ''}
       />
-      <span 
-        className="error" 
+      <span
+        className="error"
         id="description-input-error">
       </span>
       <input
-        className="popup__input popup__input_url" 
-        type="url" 
+        className="popup__input popup__input_url"
+        type="url"
         name="link"
-        id="url-input" 
+        id="url-input"
         required
-        autoComplete="off" 
-        placeholder="Ссылка на картинку" 
+        autoComplete="off"
+        placeholder="Ссылка на картинку"
         onChange={handleChangeInfo}
         value={link || ''}
       />
-      <span 
-        className="error" 
+      <span
+        className="error"
         id="url-input-error">
       </span>
     </PopupWithForm>

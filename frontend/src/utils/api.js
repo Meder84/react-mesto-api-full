@@ -4,7 +4,7 @@ class Api {
   constructor(config) {
     this._url = config.baseUrl;
     this._headers = config.headers;
-  }
+}
 
   _errorHandler(res) {
     if (res.ok) {
@@ -13,8 +13,9 @@ class Api {
     return Promise.reject(`Произошла ошибка: ${res.status}`)
   }
 
+
   getUser() {
-    return fetch( this._url + 'users/me', {
+    return fetch( this._url + '/users/me', {
       credentials: 'include',
       headers: this._headers,
     })
@@ -22,7 +23,7 @@ class Api {
   }
 
   setUser(data) {
-    return fetch( this._url + 'users/me', {
+    return fetch( this._url + '/users/me', {
       credentials: 'include',
       method: 'PATCH',
       headers: this._headers,
@@ -35,7 +36,7 @@ class Api {
   }
 
   getCards() {
-    return fetch( this._url + 'cards', {
+    return fetch( this._url + '/cards', {
       credentials: 'include',
       headers: this._headers,
     })
@@ -43,7 +44,7 @@ class Api {
   }
 
   addNewCard(data) {
-    return fetch( this._url + 'cards', {
+    return fetch( this._url + '/cards', {
       credentials: 'include',
       method: 'POST',
       headers: this._headers,
@@ -56,7 +57,7 @@ class Api {
   }
 
   deleteCard(id) {
-    return fetch( this._url + 'cards/' + id, {
+    return fetch( this._url + '/cards/' + id, {
       credentials: 'include',
       method: 'DELETE',
       headers: this._headers
@@ -65,7 +66,7 @@ class Api {
   }
 
   changeLikeCardStatus(id, condition) {
-    return fetch( this._url + 'cards/likes/' + id, {
+    return fetch( this._url + '/cards/likes/' + id, {
       credentials: 'include',
       method: condition ? 'PUT' : 'DELETE',
       headers: this._headers
@@ -74,7 +75,7 @@ class Api {
   }
 
   userAvatarUpdate(data) {
-    return fetch( this._url + 'users/me/avatar', {
+    return fetch( this._url + '/users/me/avatar', {
       credentials: 'include',
       method: 'PATCH',
       headers: this._headers,
@@ -86,18 +87,27 @@ class Api {
   }
 }
 
+const token = localStorage.getItem('jwt');
 const api = new Api({
-  baseUrl: BASE_URL,
-  headers: {
-    // authorization: `Bearer ${localStorage.getItem('jwt')}`,
-    credentials: 'include',
-    'Content-Type': 'application/json',
-  }
   // baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-33/',
-  // headers: {
-  //   authorization: '04054c0a-e5f0-43e0-9b89-7862898c59bd',
-  //   'Content-Type': 'application/json;charset=utf-8',
-  // }
+  baseUrl: BASE_URL,
+  credentials: 'include',
+  headers: {
+    authorization: `Bearer ${token}`,
+    'Accept': 'application/json',
+    'Content-Type': 'application/json;charset=utf-8',
+  }
 })
 
 export default api;
+
+
+
+
+// dataHeaders() {
+//   const token = localStorage.getItem('jwt');
+//   return {
+//     ...this._headers,
+//     'Authorization': `Bearer ${token}`,
+//   }
+// }

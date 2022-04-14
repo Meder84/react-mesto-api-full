@@ -9,7 +9,7 @@ import tick from '../images/tick.svg'
 import cross from '../images/cross.svg';
 import InfoTooltip from './InfoTooltip';
 
-const initState = {
+export const initState = {
   password: '',
   email: '',
   message: '',
@@ -25,6 +25,29 @@ function App () {
   useEffect(() => {
     tokenCheck();
   }, []);
+
+  function handleLogin (password, email, formReset) {
+    auth.authorize(password, email)
+      .then((data) => {
+        console.dir(data)
+        if (!data) return;
+
+        localStorage.setItem('jwt', data);
+        formReset();
+        history.push('/main-page');
+        setState({
+          loggedIn: true,
+          email: email,
+        });
+      })
+      .catch( () => {
+        setState({
+          message: 'Что-то пошло не так! Попробуйте ещё раз.',
+          imgTooltip: cross,
+        });
+        setIsInfoTooltipOpen(true)
+      })
+  }
 
   function handleRegister(password, email, formReset) {
     auth.register(password, email)
@@ -47,35 +70,15 @@ function App () {
     .finally(() => setIsInfoTooltipOpen(true))
   }
 
-  function handleLogin (password, email, formReset) {
-    auth.authorize(password, email)
-      .then((data) => {
-        console.dir(data.token)
-        if (!data.token) return;
-
-        localStorage.setItem('jwt', data.token);
-        formReset();
-        history.push('/main-page');
-        setState({
-          loggedIn: true,
-          email: email,
-        });
-      })
-      .catch( () => {
-        setState({
-          message: 'Что-то пошло не так! Попробуйте ещё раз.',
-          imgTooltip: cross,
-        });
-        setIsInfoTooltipOpen(true)
-      })
-  }
-
   function handleLogout () {
     localStorage.removeItem('jwt');
     history.push('/signup');
   }
 
   function tokenCheck () {
+
+    // если у пользователя есть токен в localStorage,
+    // эта функция проверит, действующий он или нет
     if (!localStorage.getItem('jwt')) return;
 
     const jwt = localStorage.getItem('jwt');

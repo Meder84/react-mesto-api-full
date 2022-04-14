@@ -16,24 +16,37 @@ function MainPage(props) {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({name: '', link: ''});
-  const [currentUser, setCurrentUser] = useState({});
+
   const [cards, setCards] = useState([]);
+  const [currentUser, setCurrentUser] = useState({
+    about: '',
+    avatar: '',
+    email: '',
+    name: '',
+    _id: 0,
+  });
 
   useEffect(() => {
-    api.getUser().then((data) => {
-      setCurrentUser(data);
+    api.getCards().then((cards) => {
+      setCards(cards.data.reverse())
     })
-    .catch((err) => alert(err))
+    .catch((err) => console.log(err))
   }, [])
 
   useEffect(() => {
-    api.getCards().then((data) => {
-      setCards(data)
+    api.getUser().then(({data}) => {
+      setCurrentUser({
+        about: data.about,
+        avatar: data.avatar,
+        email: data.email,
+        name: data.name,
+        _id: data._id,
+      });
     })
-    .catch((err) => alert(err))
+    .catch((err) => console.log(err))
   }, [])
 
-  function handleCardLike(card) {
+  function handleCardLike({card}) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
 
     api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
@@ -42,7 +55,7 @@ function MainPage(props) {
 
       setCards(newCards);
     })
-    .catch((err) => alert(err))
+    .catch((err) => console.log(err))
   }
 
   function handleCardDelete(card) {
@@ -50,7 +63,7 @@ function MainPage(props) {
     api.deleteCard(card._id).then(() => {
       setCards((cards) => cards.filter((c) => c._id !== card._id));
     })
-    .catch((err) => alert(err))
+    .catch((err) => console.log(err))
   }
 
 

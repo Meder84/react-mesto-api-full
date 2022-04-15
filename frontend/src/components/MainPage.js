@@ -33,8 +33,18 @@ function MainPage(props) {
     .catch((err) => console.log(err))
   }, [])
 
+  // useEffect(() => {
+  //   api.getUser()
+  //     .then((user) => {
+  //       console.dir(user)
+  //       setCurrentUser(user.currentUser)
+  //     })
+  //     .catch((err) => console.log(err))
+  // }, [])
+
   useEffect(() => {
-    api.getUser().then(({data}) => {
+    api.getUser().then(({ data }) => {
+      console.dir(data)
       setCurrentUser({
         about: data.about,
         avatar: data.avatar,
@@ -46,12 +56,12 @@ function MainPage(props) {
     .catch((err) => console.log(err))
   }, [])
 
-  function handleCardLike({card}) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+  function handleCardLike(card) {
+    const isLiked = card.likes.some(id => id === currentUser._id);
 
     api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
       const newCards = cards.map((c) =>
-      c._id === card._id ? newCard : c);
+      c._id === card._id ? newCard.data : c);
 
       setCards(newCards);
     })
@@ -65,7 +75,6 @@ function MainPage(props) {
     })
     .catch((err) => console.log(err))
   }
-
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
@@ -85,7 +94,7 @@ function MainPage(props) {
 
   function handleUpdateUser(data) {
     api.setUser(data).then((data) => {
-      setCurrentUser(data)
+      setCurrentUser(data.data)
       closeAllPopups()
     })
     .catch((err) => alert(err))
@@ -93,7 +102,7 @@ function MainPage(props) {
 
   function handleUpdateAvatar(data) {
     api.userAvatarUpdate(data).then((data) => {
-      setCurrentUser(data);
+      setCurrentUser(data.data);
       closeAllPopups();
     })
     .catch((err) => alert(err))
@@ -101,7 +110,7 @@ function MainPage(props) {
 
   function handleAddPlaceSubmit(data) {
     api.addNewCard(data).then((newCard) => {
-      setCards([newCard, ...cards]);
+      setCards([newCard.data, ...cards]);
       closeAllPopups()
     })
     .catch((err) => alert(err))

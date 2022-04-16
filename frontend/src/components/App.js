@@ -29,10 +29,9 @@ function App () {
   function handleLogin (password, email, formReset) {
     auth.authorize(password, email)
       .then((data) => {
-        console.dir(data)
-        if (!data) return;
+        if (!data.token) return;
 
-        localStorage.setItem('jwt', data);
+        localStorage.setItem('jwt', data.token);
         formReset();
         history.push('/main-page');
         setState({
@@ -76,9 +75,6 @@ function App () {
   }
 
   function tokenCheck () {
-
-    // если у пользователя есть токен в localStorage,
-    // эта функция проверит, действующий он или нет
     if (!localStorage.getItem('jwt')) return;
 
     const jwt = localStorage.getItem('jwt');

@@ -33,18 +33,8 @@ function MainPage(props) {
     .catch((err) => console.log(err))
   }, [])
 
-  // useEffect(() => {
-  //   api.getUser()
-  //     .then((user) => {
-  //       console.dir(user)
-  //       setCurrentUser(user.currentUser)
-  //     })
-  //     .catch((err) => console.log(err))
-  // }, [])
-
   useEffect(() => {
     api.getUser().then(({ data }) => {
-      console.dir(data)
       setCurrentUser({
         about: data.about,
         avatar: data.avatar,

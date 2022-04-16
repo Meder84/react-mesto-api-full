@@ -1,5 +1,6 @@
 // export const BASE_URL = 'https://auth.nomoreparties.co';
 export const BASE_URL = 'http://localhost:3001';
+// export const BASE_URL = 'https://api.asman.students.nomoredomains.work';
 
 const request = ({url, method = 'POST', token, body}) => {
   const config = {
@@ -10,7 +11,7 @@ const request = ({url, method = 'POST', token, body}) => {
       ...!!token && {'Authorization': `Bearer ${token}`},
     },
     ...!!body && {body: JSON.stringify(body)},
-    credentials: 'include',
+    // credentials: 'include',
   }
   return fetch(`${BASE_URL}${url}`, config)
   .then((response) => {
@@ -42,20 +43,3 @@ export const getContent = (token) => {
     token,
   })
 }
-
-// export const getContent = token => {
-//   return fetch(`${BASE_URL}/users/me`, {
-//     // credentials: 'include',
-//     method: 'GET',
-//     headers: {
-//       "Content-Type": "application/json",
-//       "Authorization" : `Bearer ${token}`
-//     }
-//   })
-//   .then((response) => {
-//     if (response.ok) {
-//       return response.json();
-//     }
-//     return Promise.reject(response.status);
-//   })
-// }

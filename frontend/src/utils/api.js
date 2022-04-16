@@ -16,7 +16,6 @@ class Api {
 
   getUser() {
     return fetch( this._url + '/users/me', {
-      credentials: 'include',
       headers: this._headers,
     })
     .then(this._errorHandler);
@@ -24,7 +23,6 @@ class Api {
 
   setUser(data) {
     return fetch( this._url + '/users/me', {
-      credentials: 'include',
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
@@ -37,7 +35,6 @@ class Api {
 
   getCards() {
     return fetch( this._url + '/cards', {
-      credentials: 'include',
       headers: this._headers,
     })
     .then(this._errorHandler);
@@ -45,7 +42,6 @@ class Api {
 
   addNewCard(data) {
     return fetch( this._url + '/cards', {
-      credentials: 'include',
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
@@ -58,7 +54,6 @@ class Api {
 
   deleteCard(id) {
     return fetch( this._url + '/cards/' + id, {
-      credentials: 'include',
       method: 'DELETE',
       headers: this._headers
     })
@@ -67,7 +62,6 @@ class Api {
 
   changeLikeCardStatus(id, condition) {
     return fetch( this._url + '/cards/' + id + '/likes', {
-      credentials: 'include',
       method: condition ? 'PUT' : 'DELETE',
       headers: this._headers
     })
@@ -76,7 +70,6 @@ class Api {
 
   userAvatarUpdate(data) {
     return fetch( this._url + '/users/me/avatar', {
-      credentials: 'include',
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
@@ -91,7 +84,6 @@ const token = localStorage.getItem('jwt');
 const api = new Api({
   // baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-33/',
   baseUrl: BASE_URL,
-  credentials: 'include',
   headers: {
     authorization: `Bearer ${token}`,
     'Accept': 'application/json',

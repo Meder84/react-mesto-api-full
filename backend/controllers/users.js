@@ -50,13 +50,7 @@ const login = (req, res, next) => {
         NODE_ENV === 'production' ? JWT_SECRET : 'jwt_secret',
         { expiresIn: '7d' },
       );
-      res.cookie('jwt', token, {
-        maxAge: 3600000 * 24 * 7,
-        httpOnly: true, // нельзя прочесть из JavaScript. Защитим токен:
-        sameSite: true, // укажет браузеру, чтобы тот посылал куки,
-        // только если запрос сделан с того же домена.
-      })
-        .send({ message: 'Авторизация прошла успешно!' });
+      res.send({ token });
     })
     .catch(next);
 };

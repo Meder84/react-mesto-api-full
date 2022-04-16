@@ -8,7 +8,13 @@ const handleAuthError = () => {
 };
 
 module.exports = (req, res, next) => {
-  const token = req.cookies.jwt;
+  const { authorization } = req.headers;
+
+  if (!authorization || !authorization.startsWith('Bearer ')) {
+    return handleAuthError(res);
+  }
+
+  const token = authorization.replace('Bearer ', '');
 
   let payload;
 
@@ -18,7 +24,7 @@ module.exports = (req, res, next) => {
     return handleAuthError(res);
   }
 
-  req.user = payload; // записываем пейлоуд в объект запроса
+  req.user = payload;
 
   return next();
 };

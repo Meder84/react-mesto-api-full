@@ -113,6 +113,11 @@ function MainPage(props) {
     setSelectedCard({name: '', link: ''});
   }
 
+  function handleLogout() {
+    setCurrentUser({});
+    setCards([]);
+    props.onLogOut();
+  }
 
 
   return (
@@ -124,7 +129,7 @@ function MainPage(props) {
           </p>
           <button
             className="header__button opacity"
-            onClick={props.handleLogout}
+            onClick={handleLogout}
           >
             Выйти
           </button>

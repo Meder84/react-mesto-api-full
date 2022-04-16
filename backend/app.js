@@ -30,11 +30,6 @@ app.use(cookieParser());
 app.use(requestLogger); // Логгер запросов нужно подключить до всех обработчиков роутов:
 
 app.use(cors());
-// app.use(cors({
-//   origin: 'http://localhost:3000',
-//   // origin: 'https://asman.students.nomoredomains.xyz',
-//   credentials: true,
-// }));
 app.get('/crash-test', () => { // Надо удалить этот код после успешного прохождения ревью.
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');

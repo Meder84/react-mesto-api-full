@@ -69,9 +69,13 @@ function App () {
     .finally(() => setIsInfoTooltipOpen(true))
   }
 
-  function handleLogout () {
+  function onLogOut () {
     localStorage.removeItem('jwt');
     history.push('/signup');
+    setState({
+      loggedIn: false,
+      email: '',
+    });
   }
 
   function tokenCheck () {
@@ -104,7 +108,7 @@ function App () {
         <Switch>
           <ProtectedRoute path="/main-page" loggedIn={state.loggedIn}>
             <MainPage
-              handleLogout={handleLogout}
+              onLogOut={onLogOut}
               email={state.email}
             />
           </ProtectedRoute>
